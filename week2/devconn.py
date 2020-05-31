@@ -1,4 +1,3 @@
-#!/
 import yaml
 import os
 from netmiko import ConnectHandler
@@ -8,7 +7,6 @@ from pprint import pprint
 homedir = os.path.expanduser('~')
 filename = ".cred"
 yamlfilename = ".netmiko.yml"
-
 
 credfile = homedir + "/" + filename
 yamlfile = homedir + "/" + yamlfilename
@@ -26,35 +24,29 @@ with open(yamlfile) as yf:
 #pprint(yamldevices)
 #print(type(yamldevices["nxos"]))
 
-pprint(yamldevices["nxos"])
+#userinput = input("Enter hostname or groupname: ")
+userinput = "cisco4"
 
-
-for ydevice in yamldevices["nxos"]:
-    conDev = ConnectHandler(**yamldevices[ydevice])
+def conDevFunc(device):
+    conDev = ConnectHandler(session_log="my_session.txt", **yamldevices[device])
     print(conDev.find_prompt())
+    output = conDev.send_command("show ip int brief")
+    output = "test"
+    return output
+
+if userinput in yamldevices:
+    #pprint(yamldevices[userinput])
+    if type(yamldevices[userinput]) is list:
+        for udevice in yamldevices[userinput]:
+            output = conDevFunc(udevice)
+    else:
+        output = conDevFunc(userinput)
+
+print(output)
+
+with open("router_output.txt", "w") as outf:
+    outf.write(output)
+
+
 
 exit()
-
-nxos1 = {
-    "device_type": "cisco_nxos",
-    "host": "nxos1.lasthop.io",
-    "username": username, 
-    "password": password, 
-    "port": "22",
-}
-
-nxos2 = {
-    "device_type": "cisco_nxos",
-    "host": "nxos2.lasthop.io",
-    "username": username, 
-    "password": password, 
-    "port": "22",
-}
-
-devices = [nxos1, nxos2]
-
-for device in devices:
-    conDev = ConnectHandler(**device)
-    print(conDev.find_prompt())
-
-
