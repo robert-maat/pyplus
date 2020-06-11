@@ -1,0 +1,1135 @@
+Help on package netmiko:
+
+NNAAMMEE
+    netmiko
+
+PPAACCKKAAGGEE  CCOONNTTEENNTTSS
+    _textfsm (package)
+    a10 (package)
+    accedian (package)
+    alcatel (package)
+    apresia (package)
+    arista (package)
+    aruba (package)
+    base_connection
+    calix (package)
+    checkpoint (package)
+    ciena (package)
+    cisco (package)
+    cisco_base_connection
+    citrix (package)
+    cloudgenix (package)
+    coriant (package)
+    dell (package)
+    dlink (package)
+    eltex (package)
+    endace (package)
+    enterasys (package)
+    extreme (package)
+    f5 (package)
+    flexvnf (package)
+    fortinet (package)
+    hp (package)
+    huawei (package)
+    ipinfusion (package)
+    juniper (package)
+    keymile (package)
+    linux (package)
+    mellanox (package)
+    mikrotik (package)
+    mrv (package)
+    netapp (package)
+    netmiko_globals
+    nokia (package)
+    oneaccess (package)
+    ovs (package)
+    paloalto (package)
+    pluribus (package)
+    quanta (package)
+    rad (package)
+    ruckus (package)
+    ruijie (package)
+    scp_functions
+    scp_handler
+    snmp_autodetect
+    sophos (package)
+    ssh_autodetect
+    ssh_dispatcher
+    ssh_exception
+    terminal_server (package)
+    ubiquiti (package)
+    utilities
+    vyos (package)
+    watchguard (package)
+
+CCLLAASSSSEESS
+    builtins.object
+        netmiko.base_connection.BaseConnection
+        netmiko.scp_handler.SCPConn
+        netmiko.ssh_autodetect.SSHDetect
+    netmiko.cisco.cisco_ios.CiscoIosFileTransfer(netmiko.cisco_base_connection.CiscoFileTransfer)
+        netmiko.cisco.cisco_ios.InLineTransfer
+    paramiko.ssh_exception.AuthenticationException(paramiko.ssh_exception.SSHException)
+        netmiko.ssh_exception.NetmikoAuthenticationException
+    paramiko.ssh_exception.SSHException(builtins.Exception)
+        netmiko.ssh_exception.NetmikoTimeoutException
+    
+    class BBaasseeCCoonnnneeccttiioonn(builtins.object)
+     |  Defines vendor independent methods.
+     |  
+     |  Otherwise method left as a stub method.
+     |  
+     |  Methods defined here:
+     |  
+     |  ____eenntteerr____(self)
+     |      Establish a session using a Context Manager.
+     |  
+     |  ____eexxiitt____(self, exc_type, exc_value, traceback)
+     |      Gracefully close connection on Context Manager exit.
+     |  
+     |  ____iinniitt____(self, ip='', host='', username='', password=None, secret='', port=None, device_type='', verbose=False, global_delay_factor=1, global_cmd_verify=None, use_keys=False, key_file=None, pkey=None, passphrase=None, allow_agent=False, ssh_strict=False, system_host_keys=False, alt_host_keys=False, alt_key_file='', ssh_config_file=None, timeout=100, session_timeout=60, auth_timeout=None, blocking_timeout=20, banner_timeout=15, keepalive=0, default_enter=None, response_return=None, serial_settings=None, fast_cli=False, session_log=None, session_log_record_writes=False, session_log_file_mode='write', allow_auto_change=False, encoding='ascii', sock=None)
+     |              Initialize attributes for establishing connection to target device.
+     |      
+     |              :param ip: IP address of target device. Not required if `host` is
+     |                  provided.
+     |              :type ip: str
+     |      
+     |              :param host: Hostname of target device. Not required if `ip` is
+     |                      provided.
+     |              :type host: str
+     |      
+     |              :param username: Username to authenticate against target device if
+     |                      required.
+     |              :type username: str
+     |      
+     |              :param password: Password to authenticate against target device if
+     |                      required.
+     |              :type password: str
+     |      
+     |              :param secret: The enable password if target device requires one.
+     |              :type secret: str
+     |      
+     |              :param port: The destination port used to connect to the target
+     |                      device.
+     |              :type port: int or None
+     |      
+     |              :param device_type: Class selection based on device type.
+     |              :type device_type: str
+     |      
+     |              :param verbose: Enable additional messages to standard output.
+     |              :type verbose: bool
+     |      
+     |              :param global_delay_factor: Multiplication factor affecting Netmiko delays (default: 1).
+     |              :type global_delay_factor: int
+     |      
+     |              :param use_keys: Connect to target device using SSH keys.
+     |              :type use_keys: bool
+     |      
+     |              :param key_file: Filename path of the SSH key file to use.
+     |              :type key_file: str
+     |      
+     |              :param pkey: SSH key object to use.
+     |              :type pkey: paramiko.PKey
+     |      
+     |              :param passphrase: Passphrase to use for encrypted key; password will be used for key
+     |                      decryption if not specified.
+     |              :type passphrase: str
+     |      
+     |              :param allow_agent: Enable use of SSH key-agent.
+     |              :type allow_agent: bool
+     |      
+     |              :param ssh_strict: Automatically reject unknown SSH host keys (default: False, which
+     |                      means unknown SSH host keys will be accepted).
+     |              :type ssh_strict: bool
+     |      
+     |              :param system_host_keys: Load host keys from the users known_hosts file.
+     |              :type system_host_keys: bool
+     |              :param alt_host_keys: If `True` host keys will be loaded from the file specified in
+     |                      alt_key_file.
+     |              :type alt_host_keys: bool
+     |      
+     |              :param alt_key_file: SSH host key file to use (if alt_host_keys=True).
+     |              :type alt_key_file: str
+     |      
+     |              :param ssh_config_file: File name of OpenSSH configuration file.
+     |              :type ssh_config_file: str
+     |      
+     |              :param timeout: Connection timeout.
+     |              :type timeout: float
+     |      
+     |              :param session_timeout: Set a timeout for parallel requests.
+     |              :type session_timeout: float
+     |      
+     |              :param auth_timeout: Set a timeout (in seconds) to wait for an authentication response.
+     |              :type auth_timeout: float
+     |      
+     |              :param banner_timeout: Set a timeout to wait for the SSH banner (pass to Paramiko).
+     |              :type banner_timeout: float
+     |      
+     |              :param keepalive: Send SSH keepalive packets at a specific interval, in seconds.
+     |                      Currently defaults to 0, for backwards compatibility (it will not attempt
+     |                      to keep the connection alive).
+     |              :type keepalive: int
+     |      
+     |              :param default_enter: Character(s) to send to correspond to enter key (default: 
+     |      ).
+     |              :type default_enter: str
+     |      
+     |              :param response_return: Character(s) to use in normalized return data to represent
+     |                      enter key (default: 
+     |      )
+     |              :type response_return: str
+     |      
+     |              :param fast_cli: Provide a way to optimize for performance. Converts select_delay_factor
+     |                      to select smallest of global and specific. Sets default global_delay_factor to .1
+     |                      (default: False)
+     |              :type fast_cli: boolean
+     |      
+     |              :param session_log: File path or BufferedIOBase subclass object to write the session log to.
+     |              :type session_log: str
+     |      
+     |              :param session_log_record_writes: The session log generally only records channel reads due
+     |                      to eliminate command duplication due to command echo. You can enable this if you
+     |                      want to record both channel reads and channel writes in the log (default: False).
+     |              :type session_log_record_writes: boolean
+     |      
+     |              :param session_log_file_mode: "write" or "append" for session_log file mode
+     |                      (default: "write")
+     |              :type session_log_file_mode: str
+     |      
+     |              :param allow_auto_change: Allow automatic configuration changes for terminal settings.
+     |                      (default: False)
+     |              :type allow_auto_change: bool
+     |      
+     |              :param encoding: Encoding to be used when writing bytes to the output channel.
+     |                      (default: ascii)
+     |              :type encoding: str
+     |      
+     |              :param sock: An open socket or socket-like object (such as a `.Channel`) to use for
+     |                      communication to the target host (default: None).
+     |              :type sock: socket
+     |      
+     |              :param global_cmd_verify: Control whether command echo verification is enabled or disabled
+     |                      (default: None). Global attribute takes precedence over function `cmd_verify`
+     |                      argument. Value of `None` indicates to use function `cmd_verify` argument.
+     |              :type global_cmd_verify: bool|None
+     |  
+     |  cchheecckk__ccoonnffiigg__mmooddee(self, check_string='', pattern='')
+     |      Checks if the device is in configuration mode or not.
+     |      
+     |      :param check_string: Identification of configuration mode from the device
+     |      :type check_string: str
+     |      
+     |      :param pattern: Pattern to terminate reading of channel
+     |      :type pattern: str
+     |  
+     |  cchheecckk__eennaabbllee__mmooddee(self, check_string='')
+     |      Check if in enable mode. Return boolean.
+     |      
+     |      :param check_string: Identification of privilege mode from device
+     |      :type check_string: str
+     |  
+     |  cclleeaannuupp(self, command='')
+     |      Logout of the session on the network device plus any additional cleanup.
+     |  
+     |  cclleeaarr__bbuuffffeerr(self, backoff=True)
+     |      Read any data available in the channel.
+     |  
+     |  cclloossee__sseessssiioonn__lloogg(self)
+     |      Close the session_log file (if it is a file that we opened).
+     |  
+     |  ccoommmmiitt(self)
+     |      Commit method for platforms that support this.
+     |  
+     |  ccoonnffiigg__mmooddee(self, config_command='', pattern='')
+     |      Enter into config_mode.
+     |      
+     |      :param config_command: Configuration command to send to the device
+     |      :type config_command: str
+     |      
+     |      :param pattern: Pattern to terminate reading of channel
+     |      :type pattern: str
+     |  
+     |  ddiissaabbllee__ppaaggiinngg(self, command='terminal length 0', delay_factor=1)
+     |      Disable paging default to a Cisco CLI method.
+     |      
+     |      :param command: Device command to disable pagination of output
+     |      :type command: str
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |  
+     |  ddiissccoonnnneecctt(self)
+     |      Try to gracefully close the session.
+     |  
+     |  eennaabbllee(self, cmd='', pattern='ssword', re_flags=<RegexFlag.IGNORECASE: 2>)
+     |      Enter enable mode.
+     |      
+     |      :param cmd: Device command to enter enable mode
+     |      :type cmd: str
+     |      
+     |      :param pattern: pattern to search for indicating device is waiting for password
+     |      :type pattern: str
+     |      
+     |      :param re_flags: Regular expression flags used in conjunction with pattern
+     |      :type re_flags: int
+     |  
+     |  eessttaabblliisshh__ccoonnnneeccttiioonn(self, width=None, height=None)
+     |      Establish SSH connection to the network device
+     |      
+     |      Timeout will generate a NetmikoTimeoutException
+     |      Authentication failure will generate a NetmikoAuthenticationException
+     |      
+     |      width and height are needed for Fortinet paging setting.
+     |      
+     |      :param width: Specified width of the VT100 terminal window
+     |      :type width: int
+     |      
+     |      :param height: Specified height of the VT100 terminal window
+     |      :type height: int
+     |  
+     |  eexxiitt__ccoonnffiigg__mmooddee(self, exit_config='', pattern='')
+     |      Exit from configuration mode.
+     |      
+     |      :param exit_config: Command to exit configuration mode
+     |      :type exit_config: str
+     |      
+     |      :param pattern: Pattern to terminate reading of channel
+     |      :type pattern: str
+     |  
+     |  eexxiitt__eennaabbllee__mmooddee(self, exit_command='')
+     |      Exit enable mode.
+     |      
+     |      :param exit_command: Command that exits the session from privileged mode
+     |      :type exit_command: str
+     |  
+     |  ffiinndd__pprroommpptt(self, delay_factor=1)
+     |      Finds the current network device prompt, last line only.
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |  
+     |  iiss__aalliivvee(self)
+     |      Returns a boolean flag with the state of the connection.
+     |  
+     |  nnoorrmmaalliizzee__ccmmdd(self, command)
+     |      Normalize CLI commands to have a single trailing newline.
+     |      
+     |      :param command: Command that may require line feed to be normalized
+     |      :type command: str
+     |  
+     |  nnoorrmmaalliizzee__lliinneeffeeeeddss(self, a_string)
+     |      Convert `
+     |      `,`
+     |      `, `
+     |      ` to `
+     |      .`
+     |      
+     |              :param a_string: A string that may have non-normalized line feeds
+     |                  i.e. output returned from device, or a device prompt
+     |              :type a_string: str
+     |  
+     |  ooppeenn__sseessssiioonn__lloogg(self, filename, mode='write')
+     |      Open the session_log file.
+     |  
+     |  ppaarraammiikkoo__cclleeaannuupp(self)
+     |      Cleanup Paramiko to try to gracefully handle SSH session ending.
+     |  
+     |  rreeaadd__cchhaannnneell(self)
+     |      Generic handler that will read all the data from an SSH or telnet channel.
+     |  
+     |  rreeaadd__uunnttiill__ppaatttteerrnn(self, *args, **kwargs)
+     |      Read channel until pattern detected. Return ALL data available.
+     |  
+     |  rreeaadd__uunnttiill__pprroommpptt(self, *args, **kwargs)
+     |      Read channel until self.base_prompt detected. Return ALL data available.
+     |  
+     |  rreeaadd__uunnttiill__pprroommpptt__oorr__ppaatttteerrnn(self, pattern='', re_flags=0)
+     |      Read until either self.base_prompt or pattern is detected.
+     |      
+     |      :param pattern: the pattern used to identify that the output is complete (i.e. stop         reading when pattern is detected). pattern will be combined with self.base_prompt to         terminate output reading when the first of self.base_prompt or pattern is detected.
+     |      :type pattern: regular expression string
+     |      
+     |      :param re_flags: regex flags used in conjunction with pattern to search for prompt         (defaults to no flags)
+     |      :type re_flags: int
+     |  
+     |  ssaavvee__ccoonnffiigg(self, *args, **kwargs)
+     |      Not Implemented
+     |  
+     |  sseelleecctt__ddeellaayy__ffaaccttoorr(self, delay_factor)
+     |      Choose the greater of delay_factor or self.global_delay_factor (default).
+     |      In fast_cli choose the lesser of delay_factor of self.global_delay_factor.
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |  
+     |  sseenndd__ccoommmmaanndd(self, command_string, expect_string=None, delay_factor=1, max_loops=500, auto_find_prompt=True, strip_prompt=True, strip_command=True, normalize=True, use_textfsm=False, textfsm_template=None, use_genie=False, cmd_verify=True)
+     |      Execute command_string on the SSH channel using a pattern-based mechanism. Generally
+     |      used for show commands. By default this method will keep waiting to receive data until the
+     |      network device prompt is detected. The current network device prompt will be determined
+     |      automatically.
+     |      
+     |      :param command_string: The command to be executed on the remote device.
+     |      :type command_string: str
+     |      
+     |      :param expect_string: Regular expression pattern to use for determining end of output.
+     |          If left blank will default to being based on router prompt.
+     |      :type expect_string: str
+     |      
+     |      :param delay_factor: Multiplying factor used to adjust delays (default: 1).
+     |      :type delay_factor: int
+     |      
+     |      :param max_loops: Controls wait time in conjunction with delay_factor. Will default to be
+     |          based upon self.timeout.
+     |      :type max_loops: int
+     |      
+     |      :param strip_prompt: Remove the trailing router prompt from the output (default: True).
+     |      :type strip_prompt: bool
+     |      
+     |      :param strip_command: Remove the echo of the command from the output (default: True).
+     |      :type strip_command: bool
+     |      
+     |      :param normalize: Ensure the proper enter is sent at end of command (default: True).
+     |      :type normalize: bool
+     |      
+     |      :param use_textfsm: Process command output through TextFSM template (default: False).
+     |      :type normalize: bool
+     |      
+     |      :param textfsm_template: Name of template to parse output with; can be fully qualified
+     |          path, relative path, or name of file in current directory. (default: None).
+     |      
+     |      :param use_genie: Process command output through PyATS/Genie parser (default: False).
+     |      :type normalize: bool
+     |      
+     |      :param cmd_verify: Verify command echo before proceeding (default: True).
+     |      :type cmd_verify: bool
+     |  
+     |  sseenndd__ccoommmmaanndd__eexxppeecctt(self, *args, **kwargs)
+     |      Support previous name of send_command method.
+     |      
+     |      :param args: Positional arguments to send to send_command()
+     |      :type args: list
+     |      
+     |      :param kwargs: Keyword arguments to send to send_command()
+     |      :type kwargs: dict
+     |  
+     |  sseenndd__ccoommmmaanndd__ttiimmiinngg(self, command_string, delay_factor=1, max_loops=150, strip_prompt=True, strip_command=True, normalize=True, use_textfsm=False, textfsm_template=None, use_genie=False, cmd_verify=False, cmd_echo=None)
+     |      Execute command_string on the SSH channel using a delay-based mechanism. Generally
+     |      used for show commands.
+     |      
+     |      :param command_string: The command to be executed on the remote device.
+     |      :type command_string: str
+     |      
+     |      :param delay_factor: Multiplying factor used to adjust delays (default: 1).
+     |      :type delay_factor: int or float
+     |      
+     |      :param max_loops: Controls wait time in conjunction with delay_factor. Will default to be
+     |          based upon self.timeout.
+     |      :type max_loops: int
+     |      
+     |      :param strip_prompt: Remove the trailing router prompt from the output (default: True).
+     |      :type strip_prompt: bool
+     |      
+     |      :param strip_command: Remove the echo of the command from the output (default: True).
+     |      :type strip_command: bool
+     |      
+     |      :param normalize: Ensure the proper enter is sent at end of command (default: True).
+     |      :type normalize: bool
+     |      
+     |      :param use_textfsm: Process command output through TextFSM template (default: False).
+     |      :type use_textfsm: bool
+     |      
+     |      :param textfsm_template: Name of template to parse output with; can be fully qualified
+     |          path, relative path, or name of file in current directory. (default: None).
+     |      :type textfsm_template: str
+     |      
+     |      :param use_genie: Process command output through PyATS/Genie parser (default: False).
+     |      :type use_genie: bool
+     |      
+     |      :param cmd_verify: Verify command echo before proceeding (default: False).
+     |      :type cmd_verify: bool
+     |      
+     |      :param cmd_echo: Deprecated (use cmd_verify instead)
+     |      :type cmd_echo: bool
+     |  
+     |  sseenndd__ccoonnffiigg__ffrroomm__ffiillee(self, config_file=None, **kwargs)
+     |      Send configuration commands down the SSH channel from a file.
+     |      
+     |      The file is processed line-by-line and each command is sent down the
+     |      SSH channel.
+     |      
+     |      **kwargs are passed to send_config_set method.
+     |      
+     |      :param config_file: Path to configuration file to be sent to the device
+     |      :type config_file: str
+     |      
+     |      :param kwargs: params to be sent to send_config_set method
+     |      :type kwargs: dict
+     |  
+     |  sseenndd__ccoonnffiigg__sseett(self, config_commands=None, exit_config_mode=True, delay_factor=1, max_loops=150, strip_prompt=False, strip_command=False, config_mode_command=None, cmd_verify=True, enter_config_mode=True)
+     |      Send configuration commands down the SSH channel.
+     |      
+     |      config_commands is an iterable containing all of the configuration commands.
+     |      The commands will be executed one after the other.
+     |      
+     |      Automatically exits/enters configuration mode.
+     |      
+     |      :param config_commands: Multiple configuration commands to be sent to the device
+     |      :type config_commands: list or string
+     |      
+     |      :param exit_config_mode: Determines whether or not to exit config mode after complete
+     |      :type exit_config_mode: bool
+     |      
+     |      :param delay_factor: Factor to adjust delays
+     |      :type delay_factor: int
+     |      
+     |      :param max_loops: Controls wait time in conjunction with delay_factor (default: 150)
+     |      :type max_loops: int
+     |      
+     |      :param strip_prompt: Determines whether or not to strip the prompt
+     |      :type strip_prompt: bool
+     |      
+     |      :param strip_command: Determines whether or not to strip the command
+     |      :type strip_command: bool
+     |      
+     |      :param config_mode_command: The command to enter into config mode
+     |      :type config_mode_command: str
+     |      
+     |      :param cmd_verify: Whether or not to verify command echo for each command in config_set
+     |      :type cmd_verify: bool
+     |      
+     |      :param enter_config_mode: Do you enter config mode before sending config commands
+     |      :type exit_config_mode: bool
+     |  
+     |  sseerriiaall__llooggiinn(self, pri_prompt_terminator='#\\s*$', alt_prompt_terminator='>\\s*$', username_pattern='(?:[Uu]ser:|sername|ogin)', pwd_pattern='assword', delay_factor=1, max_loops=20)
+     |  
+     |  sseessssiioonn__pprreeppaarraattiioonn(self)
+     |      Prepare the session after the connection has been established
+     |      
+     |      This method handles some differences that occur between various devices
+     |      early on in the session.
+     |      
+     |      In general, it should include:
+     |      self._test_channel_read()
+     |      self.set_base_prompt()
+     |      self.disable_paging()
+     |      self.set_terminal_width()
+     |      self.clear_buffer()
+     |  
+     |  sseett__bbaassee__pprroommpptt(self, pri_prompt_terminator='#', alt_prompt_terminator='>', delay_factor=1)
+     |      Sets self.base_prompt
+     |      
+     |      Used as delimiter for stripping of trailing prompt in output.
+     |      
+     |      Should be set to something that is general and applies in multiple contexts. For Cisco
+     |      devices this will be set to router hostname (i.e. prompt without > or #).
+     |      
+     |      This will be set on entering user exec or privileged exec on Cisco, but not when
+     |      entering/exiting config mode.
+     |      
+     |      :param pri_prompt_terminator: Primary trailing delimiter for identifying a device prompt
+     |      :type pri_prompt_terminator: str
+     |      
+     |      :param alt_prompt_terminator: Alternate trailing delimiter for identifying a device prompt
+     |      :type alt_prompt_terminator: str
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |  
+     |  sseett__tteerrmmiinnaall__wwiiddtthh(self, command='', delay_factor=1)
+     |      CLI terminals try to automatically adjust the line based on the width of the terminal.
+     |      This causes the output to get distorted when accessed programmatically.
+     |      
+     |      Set terminal width to 511 which works on a broad set of devices.
+     |      
+     |      :param command: Command string to send to the device
+     |      :type command: str
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |  
+     |  ssppeecciiaall__llooggiinn__hhaannddlleerr(self, delay_factor=1)
+     |      Handler for devices like WLC, Extreme ERS that throw up characters prior to login.
+     |  
+     |  ssttrriipp__aannssii__eessccaappee__ccooddeess(self, string_buffer)
+     |      Remove any ANSI (VT100) ESC codes from the output
+     |      
+     |      http://en.wikipedia.org/wiki/ANSI_escape_code
+     |      
+     |      Note: this does not capture ALL possible ANSI Escape Codes only the ones
+     |      I have encountered
+     |      
+     |      Current codes that are filtered:
+     |      ESC = '' or chr(27)
+     |      ESC = is the escape character [^ in hex ('')
+     |      ESC[24;27H   Position cursor
+     |      ESC[?25h     Show the cursor
+     |      ESC[E        Next line (HP does ESC-E)
+     |      ESC[K        Erase line from cursor to the end of line
+     |      ESC[2K       Erase entire line
+     |      ESC[1;24r    Enable scrolling from start to row end
+     |      ESC[?6l      Reset mode screen with options 640 x 200 monochrome (graphics)
+     |      ESC[?7l      Disable line wrapping
+     |      ESC[2J       Code erase display
+     |      ESC[00;32m   Color Green (30 to 37 are different colors) more general pattern is
+     |                   ESC[\d\d;\d\dm and ESC[\d\d;\d\d;\d\dm
+     |      ESC[6n       Get cursor position
+     |      ESC[1D       Move cursor position leftward by x characters (1 in this case)
+     |      
+     |      HP ProCurve and Cisco SG300 require this (possible others).
+     |      
+     |      :param string_buffer: The string to be processed to remove ANSI escape codes
+     |      :type string_buffer: str
+     |  
+     |  ssttrriipp__ccoommmmaanndd(self, command_string, output)
+     |      Strip command_string from output string
+     |      
+     |      Cisco IOS adds backspaces into output for long commands (i.e. for commands that line wrap)
+     |      
+     |      :param command_string: The command string sent to the device
+     |      :type command_string: str
+     |      
+     |      :param output: The returned output as a result of the command string sent to the device
+     |      :type output: str
+     |  
+     |  ssttrriipp__pprroommpptt(self, a_string)
+     |      Strip the trailing router prompt from the output.
+     |      
+     |      :param a_string: Returned string from device
+     |      :type a_string: str
+     |  
+     |  tteellnneett__llooggiinn(self, pri_prompt_terminator='#\\s*$', alt_prompt_terminator='>\\s*$', username_pattern='(?:user:|username|login|user name)', pwd_pattern='assword', delay_factor=1, max_loops=20)
+     |      Telnet login. Can be username/password or just password.
+     |      
+     |      :param pri_prompt_terminator: Primary trailing delimiter for identifying a device prompt
+     |      :type pri_prompt_terminator: str
+     |      
+     |      :param alt_prompt_terminator: Alternate trailing delimiter for identifying a device prompt
+     |      :type alt_prompt_terminator: str
+     |      
+     |      :param username_pattern: Pattern used to identify the username prompt
+     |      :type username_pattern: str
+     |      
+     |      :param delay_factor: See __init__: global_delay_factor
+     |      :type delay_factor: int
+     |      
+     |      :param max_loops: Controls the wait time in conjunction with the delay_factor
+     |      (default: 20)
+     |  
+     |  wwrriittee__cchhaannnneell(self, out_data)
+     |      Generic handler that will write to both SSH and telnet channel.
+     |      
+     |      :param out_data: data to be written to the channel
+     |      :type out_data: str (can be either unicode/byte string)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods defined here:
+     |  
+     |  ssttrriipp__bbaacckkssppaacceess(output)
+     |      Strip any backspace characters out of the output.
+     |      
+     |      :param output: Output obtained from a remote network device.
+     |      :type output: str
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+    
+    class IInnLLiinneeTTrraannssffeerr(CiscoIosFileTransfer)
+     |  Use TCL on Cisco IOS to directly transfer file.
+     |  
+     |  Method resolution order:
+     |      InLineTransfer
+     |      CiscoIosFileTransfer
+     |      netmiko.cisco_base_connection.CiscoFileTransfer
+     |      netmiko.scp_handler.BaseFileTransfer
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  ____eenntteerr____(self)
+     |      Context manager setup
+     |  
+     |  ____eexxiitt____(self, exc_type, exc_value, traceback)
+     |      Context manager cleanup.
+     |  
+     |  ____iinniitt____(self, ssh_conn, source_file=None, dest_file=None, file_system=None, direction='put', source_config=None, socket_timeout=10.0)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  cclloossee__ssccpp__cchhaann(self)
+     |      Close the SCP connection to the remote network device.
+     |  
+     |  ccoonnffiigg__mmdd55(self, source_config)
+     |  
+     |  ddiissaabbllee__ssccpp(self, cmd=None)
+     |      Disable SCP on remote device.
+     |      
+     |      Defaults to Cisco IOS command
+     |  
+     |  eennaabbllee__ssccpp(self, cmd=None)
+     |      Enable SCP on remote device.
+     |      
+     |      Defaults to Cisco IOS command
+     |  
+     |  eessttaabblliisshh__ssccpp__ccoonnnn(self)
+     |      Establish SCP connection.
+     |  
+     |  ffiillee__mmdd55(self, file_name)
+     |      Compute MD5 hash of file.
+     |  
+     |  ggeett__ffiillee(self)
+     |      SCP copy the file from the remote device to local system.
+     |  
+     |  llooccaall__ssppaaccee__aavvaaiillaabbllee(self)
+     |      Return space available on local filesystem.
+     |  
+     |  ppuutt__ffiillee(self)
+     |      SCP copy the file from the local system to the remote device.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from netmiko.scp_handler.BaseFileTransfer:
+     |  
+     |  cchheecckk__ffiillee__eexxiissttss(self, remote_cmd='')
+     |      Check if the dest_file already exists on the file system (return boolean).
+     |  
+     |  ccoommppaarree__mmdd55(self)
+     |      Compare md5 of file on network device to md5 of local file.
+     |  
+     |  rreemmoottee__ffiillee__ssiizzee(self, remote_cmd='', remote_file=None)
+     |      Get the file size of the remote file.
+     |  
+     |  rreemmoottee__mmdd55(self, base_cmd='verify /md5', remote_file=None)
+     |      Calculate remote MD5 and returns the hash.
+     |      
+     |      This command can be CPU intensive on the remote device.
+     |  
+     |  rreemmoottee__ssppaaccee__aavvaaiillaabbllee(self, search_pattern='(\\d+) \\w+ free')
+     |      Return space available on remote device.
+     |  
+     |  ttrraannssffeerr__ffiillee(self)
+     |      SCP transfer file.
+     |  
+     |  vveerriiffyy__ffiillee(self)
+     |      Verify the file has been transferred correctly.
+     |  
+     |  vveerriiffyy__ssppaaccee__aavvaaiillaabbllee(self, search_pattern='(\\d+) \\w+ free')
+     |      Verify sufficient space is available on destination file system (return boolean).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from netmiko.scp_handler.BaseFileTransfer:
+     |  
+     |  pprroocceessss__mmdd55(md5_output, pattern='=\\s+(\\S+)')
+     |      Process the string to retrieve the MD5 hash
+     |      
+     |      Output from Cisco IOS (ASA is similar)
+     |      .MD5 of flash:file_name Done!
+     |      verify /md5 (flash:file_name) = 410db2a7015eaa42b1fe71f1bf3d59a2
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from netmiko.scp_handler.BaseFileTransfer:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+    
+    NNeettMMiikkooAAuutthheennttiiccaattiioonnEExxcceeppttiioonn = class NetmikoAuthenticationException(paramiko.ssh_exception.AuthenticationException)
+     |  SSH authentication exception based on Paramiko AuthenticationException.
+     |  
+     |  Method resolution order:
+     |      NetmikoAuthenticationException
+     |      paramiko.ssh_exception.AuthenticationException
+     |      paramiko.ssh_exception.SSHException
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from paramiko.ssh_exception.SSHException:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    NNeettMMiikkooTTiimmeeoouuttEExxcceeppttiioonn = class NetmikoTimeoutException(paramiko.ssh_exception.SSHException)
+     |  SSH session timed trying to connect to the device.
+     |  
+     |  Method resolution order:
+     |      NetmikoTimeoutException
+     |      paramiko.ssh_exception.SSHException
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from paramiko.ssh_exception.SSHException:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class NNeettmmiikkooAAuutthheennttiiccaattiioonnEExxcceeppttiioonn(paramiko.ssh_exception.AuthenticationException)
+     |  SSH authentication exception based on Paramiko AuthenticationException.
+     |  
+     |  Method resolution order:
+     |      NetmikoAuthenticationException
+     |      paramiko.ssh_exception.AuthenticationException
+     |      paramiko.ssh_exception.SSHException
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from paramiko.ssh_exception.SSHException:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class NNeettmmiikkooTTiimmeeoouuttEExxcceeppttiioonn(paramiko.ssh_exception.SSHException)
+     |  SSH session timed trying to connect to the device.
+     |  
+     |  Method resolution order:
+     |      NetmikoTimeoutException
+     |      paramiko.ssh_exception.SSHException
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors inherited from paramiko.ssh_exception.SSHException:
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  ____iinniitt____(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ____nneeww____(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  ____ddeellaattttrr____(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  ____ggeettaattttrriibbuuttee____(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  ____rreedduuccee____(...)
+     |      helper for pickle
+     |  
+     |  ____rreepprr____(self, /)
+     |      Return repr(self).
+     |  
+     |  ____sseettaattttrr____(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  ____sseettssttaattee____(...)
+     |  
+     |  ____ssttrr____(self, /)
+     |      Return str(self).
+     |  
+     |  wwiitthh__ttrraacceebbaacckk(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  ____ccaauussee____
+     |      exception cause
+     |  
+     |  ____ccoonntteexxtt____
+     |      exception context
+     |  
+     |  ____ddiicctt____
+     |  
+     |  ____ssuupppprreessss__ccoonntteexxtt____
+     |  
+     |  ____ttrraacceebbaacckk____
+     |  
+     |  aarrggss
+    
+    class SSCCPPCCoonnnn(builtins.object)
+     |  Establish a secure copy channel to the remote network device.
+     |  
+     |  Must close the SCP connection to get the file to write to the remote filesystem
+     |  
+     |  Methods defined here:
+     |  
+     |  ____iinniitt____(self, ssh_conn, socket_timeout=10.0)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  cclloossee(self)
+     |      Close the SCP connection.
+     |  
+     |  eessttaabblliisshh__ssccpp__ccoonnnn(self)
+     |      Establish the secure copy connection.
+     |  
+     |  ssccpp__ggeett__ffiillee(self, source_file, dest_file)
+     |      Get file using SCP.
+     |  
+     |  ssccpp__ppuutt__ffiillee(self, source_file, dest_file)
+     |      Put file using SCP.
+     |  
+     |  ssccpp__ttrraannssffeerr__ffiillee(self, source_file, dest_file)
+     |      Put file using SCP (for backwards compatibility).
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+    
+    class SSSSHHDDeetteecctt(builtins.object)
+     |  The SSHDetect class tries to automatically guess the device type running on the SSH remote end.
+     |  Be careful that the kwargs 'device_type' must be set to 'autodetect', otherwise it won't work at
+     |  all.
+     |  
+     |  Parameters
+     |  ----------
+     |  *args : list
+     |      The same *args that you might provide to the netmiko.ssh_dispatcher.ConnectHandler.
+     |  *kwargs : dict
+     |      The same *kwargs that you might provide to the netmiko.ssh_dispatcher.ConnectHandler.
+     |  
+     |  Attributes
+     |  ----------
+     |  connection : netmiko.terminal_server.TerminalServerSSH
+     |      A basic connection to the remote SSH end.
+     |  potential_matches: dict
+     |      Dict of (device_type, accuracy) that is populated through an interaction with the
+     |      remote end.
+     |  
+     |  Methods
+     |  -------
+     |  autodetect()
+     |      Try to determine the device type.
+     |  
+     |  Methods defined here:
+     |  
+     |  ____iinniitt____(self, *args, **kwargs)
+     |      Constructor of the SSHDetect class
+     |  
+     |  aauuttooddeetteecctt(self)
+     |      Try to guess the best 'device_type' based on patterns defined in SSH_MAPPER_BASE
+     |      
+     |      Returns
+     |      -------
+     |      best_match : str or None
+     |          The device type that is currently the best to use to interact with the device
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  ____ddiicctt____
+     |      dictionary for instance variables (if defined)
+     |  
+     |  ____wweeaakkrreeff____
+     |      list of weak references to the object (if defined)
+
+FFUUNNCCTTIIOONNSS
+    CCoonnnneeccttHHaannddlleerr(*args, **kwargs)
+        Factory function selects the proper class and creates object based on device_type.
+    
+    FFiilleeTTrraannssffeerr(*args, **kwargs)
+        Factory function selects the proper SCP class and creates object based on device_type.
+    
+    NNeettmmiikkoo = ConnectHandler(*args, **kwargs)
+        Factory function selects the proper class and creates object based on device_type.
+    
+    ffiillee__ttrraannssffeerr(ssh_conn, source_file, dest_file, file_system=None, direction='put', disable_md5=False, inline_transfer=False, overwrite_file=False, socket_timeout=10.0)
+        Use Secure Copy or Inline (IOS-only) to transfer files to/from network devices.
+        
+        inline_transfer ONLY SUPPORTS TEXT FILES and will not support binary file transfers.
+        
+        return {
+            'file_exists': boolean,
+            'file_transferred': boolean,
+            'file_verified': boolean,
+        }
+    
+    rreeddiissppaattcchh(obj, device_type, session_prep=True)
+        Dynamically change Netmiko object's class to proper class.
+        Generally used with terminal_server device_type when you need to redispatch after interacting
+        with terminal server.
+    
+    sssshh__ddiissppaattcchheerr(device_type)
+        Select the class to be instantiated based on vendor/platform.
+
+DDAATTAA
+    ____aallll____ = ('ConnectHandler', 'ssh_dispatcher', 'platforms', 'SCPConn',...
+    ppllaattffoorrmmss = ['a10', 'a10_ssh', 'accedian', 'accedian_ssh', 'alcatel_ao...
+
+VVEERRSSIIOONN
+    3.1.0
+
+FFIILLEE
+    /home/maat/VENV/py3_venv/lib64/python3.6/site-packages/netmiko/__init__.py
+
