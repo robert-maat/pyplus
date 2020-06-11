@@ -1,111 +1,103 @@
 
-Cisco NX-OS Software
-Copyright (c) 2002-2019, Cisco Systems, Inc. All rights reserved.
-Nexus 9000v software ("Nexus 9000v Software") and related documentation,
-files or other reference materials ("Documentation") are
-the proprietary property and confidential information of Cisco
-Systems, Inc. ("Cisco") and are protected, without limitation,
-pursuant to United States and International copyright and trademark
-laws in the applicable jurisdiction which provide civil and criminal
-penalties for copying or distribution without Cisco's authorization.
 
-Any use or disclosure, in whole or in part, of the Nexus 9000v Software
-or Documentation to any third party for any purposes is expressly
-prohibited except as otherwise authorized by Cisco in writing.
-The copyrights to certain works contained herein are owned by other
-third parties and are used and distributed under license. Some parts
-of this software may be covered under the GNU Public License or the
-GNU Lesser General Public License. A copy of each such license is
-available at
-http://www.gnu.org/licenses/gpl.html and
-http://www.gnu.org/licenses/lgpl.html
-***************************************************************************
-*  Nexus 9000v is strictly limited to use for evaluation, demonstration   *
-*  and NX-OS education. Any use or disclosure, in whole or in part of     *
-*  the Nexus 9000v Software or Documentation to any third party for any   *
-*  purposes is expressly prohibited except as otherwise authorized by     *
-*  Cisco in writing.                                                      *
-***************************************************************************
+cisco4#
+cisco4#terminal length 0
+cisco4#terminal width 511
+cisco4#
+cisco4#
+cisco4#show version
+Cisco IOS XE Software, Version 16.12.03
+Cisco IOS Software [Gibraltar], ISR Software (ARMV8EL_LINUX_IOSD-UNIVERSALK9_IAS-M), Version 16.12.3, RELEASE SOFTWARE (fc5)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2020 by Cisco Systems, Inc.
+Compiled Mon 09-Mar-20 20:31 by mcpre
 
-nxos2# 
 
-nxos2# terminal length 0
+Cisco IOS-XE software, Copyright (c) 2005-2020 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
 
-nxos2# terminal width 511
 
-nxos2# 
+ROM: IOS-XE ROMMON
 
-nxos2# 
+cisco4 uptime is 1 week, 6 days, 1 hour, 26 minutes
+Uptime for this control processor is 1 week, 6 days, 1 hour, 28 minutes
+System returned to ROM by Reload Command at 09:49:02 PDT Fri May 29 2020
+System restarted at 09:59:16 PDT Fri May 29 2020
+System image file is "bootflash:c1100-universalk9_ias.16.12.03.SPA.bin"
+Last reload reason: Reload Command
 
-nxos2# show lldp neighbors detail
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+
+
+Suite License Information for Module:'esg' 
+
+--------------------------------------------------------------------------------
+Suite                 Suite Current         Type           Suite Next reboot     
+--------------------------------------------------------------------------------
+FoundationSuiteK9     None                  Smart License  None                  
+securityk9
+appxk9
+
+
+Technology Package License Information: 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+appxk9           None             Smart License    None
+securityk9       None             Smart License    None
+ipbase           ipbasek9         Smart License    ipbasek9
+
+The current throughput level is unthrottled 
+
+
+Smart Licensing Status: REGISTERED/AUTHORIZED
+
+cisco C1111-4P (1RU) processor with 1401823K/6147K bytes of memory.
+Processor board ID FGL223392W1
+1 Virtual Ethernet interface
+6 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+4194304K bytes of physical memory.
+2863103K bytes of flash memory at bootflash:.
+0K bytes of WebUI ODM Files at webui:.
+
+Configuration register is 0x2102
+
+cisco4#
+cisco4#show lldp neighbors
 Capability codes:
-  (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
-  (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
-Device ID            Local Intf      Hold-time  Capability  Port ID  
+    (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+    (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
 
-Chassis id: 5254.0012.345e
-Port id: Ethernet1/1
-Local Port id: Eth1/1
-Port Description: Ethernet1/1
-System Name: nxos1.bogus.com
-System Description: Cisco Nexus Operating System (NX-OS) Software 9.2(3)
-TAC support: http://www.cisco.com/tac
-Copyright (c) 2002-2019, Cisco Systems, Inc. All rights reserved.
-Time remaining: 95 seconds
-System Capabilities: B, R
-Enabled Capabilities: B, R
-Management Address: 10.0.2.15
-Management Address IPV6: not advertised
-Vlan ID: not advertised
+Device ID           Local Intf     Hold-time  Capability      Port ID
+twb-sf-hpsw1        Gi0/0/0        120        B               17
 
+Total entries displayed: 1
 
-Chassis id: 5254.0012.345f
-Port id: Ethernet1/2
-Local Port id: Eth1/2
-Port Description: Ethernet1/2
-System Name: nxos1.bogus.com
-System Description: Cisco Nexus Operating System (NX-OS) Software 9.2(3)
-TAC support: http://www.cisco.com/tac
-Copyright (c) 2002-2019, Cisco Systems, Inc. All rights reserved.
-Time remaining: 95 seconds
-System Capabilities: B, R
-Enabled Capabilities: B, R
-Management Address: 10.0.2.15
-Management Address IPV6: not advertised
-Vlan ID: not advertised
-
-
-Chassis id: 5254.0012.3460
-Port id: Ethernet1/3
-Local Port id: Eth1/3
-Port Description: Ethernet1/3
-System Name: nxos1.bogus.com
-System Description: Cisco Nexus Operating System (NX-OS) Software 9.2(3)
-TAC support: http://www.cisco.com/tac
-Copyright (c) 2002-2019, Cisco Systems, Inc. All rights reserved.
-Time remaining: 95 seconds
-System Capabilities: B, R
-Enabled Capabilities: B, R
-Management Address: 10.0.2.15
-Management Address IPV6: not advertised
-Vlan ID: not advertised
-
-
-Chassis id: 5254.0012.3461
-Port id: Ethernet1/4
-Local Port id: Eth1/4
-Port Description: Ethernet1/4
-System Name: nxos1.bogus.com
-System Description: Cisco Nexus Operating System (NX-OS) Software 9.2(3)
-TAC support: http://www.cisco.com/tac
-Copyright (c) 2002-2019, Cisco Systems, Inc. All rights reserved.
-Time remaining: 95 seconds
-System Capabilities: B, R
-Enabled Capabilities: B, R
-Management Address: 10.0.2.15
-Management Address IPV6: not advertised
-Vlan ID: not advertised
-
-Total entries displayed: 4
-
-nxos2# 
+cisco4#
+cisco4#exit
