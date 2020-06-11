@@ -27,25 +27,27 @@ password = password.strip()
 with open(yamlfile) as yf:
     yamldevices = yaml.load(yf)
 
-#pprint(yamldevices)
-#print(type(yamldevices["nxos"]))
-
-print(datetime.now())
-now = datetime.now()
-
-# get userinput which devices to connect
+# ask user for input of devicename/group
 userinput = input("Enter hostname or groupname: ")
-#userinput = "cisco4"
+
+commands = "ip name-server 1.1.1.1\n"
+commands += "ip name-server 1.0.0.1\n"
+commands += "ip domain-lookup\n"
+
+
+listcommands = ["ip name-server 1.1.1.1", "ip name-server 1.0.0.1", "ip domain-lookup"]
+
+print("commands in one string")
+print(commands)
+
+print("commands in one list")
+print(listcommands)
 
 def conDevFunc(device):
-    conDev = ConnectHandler(session_log="my_session.txt", **yamldevices[device])
+    conDev = ConnectHandler(session_log="my_session.txt", fast_cli=True, **yamldevices[device])
     print(conDev.find_prompt())
-    #now = datetime.now()
-    #output = "Current starttime is : " + str(now) + "\n"
-    output = conDev.send_command("show version", use_textfsm=True)
-    output += conDev.send_command("show lldp neighbors", use_textfsm=True)
-    #now = datetime.now()
-    #output += "Current finishtime is : " + str(now) +"\n"
+    output = conDev.send_config_set(listcommands)
+    output += "\n"
     conDev.disconnect()
     return output
 
@@ -53,8 +55,9 @@ def conDevFunc(device):
 if userinput in yamldevices:
     #pprint(yamldevices[userinput])
     if type(yamldevices[userinput]) is list:
+        output = ""
         for udevice in yamldevices[userinput]:
-            output = conDevFunc(udevice)
+            output += conDevFunc(udevice)
     else:
         output = conDevFunc(userinput)
 else:
@@ -65,10 +68,7 @@ else:
 
 
 pprint(output)
-
-print("type of output is: " + str(type(output)))
-
-print("lldp neighbor interface number is : " + str(output[1].get('neighbor_interface')))
+print(output)
 
 #with open("router_output.txt", "w") as outf:
 #    outf.write(output)
